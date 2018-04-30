@@ -4,7 +4,11 @@ defmodule Rpx.CLI do
   end
 
   defp run({args_config, [term, replacement], _}) do
-    Rpx.run(args_config, term, replacement)
+    Rpx.run(args_config, term, replacement, ".")
+  end
+
+  defp run({args_config, [term, replacement, base_path], _}) do
+    Rpx.run(args_config, term, replacement, base_path)
   end
 
   defp run(_) do
@@ -14,7 +18,7 @@ defmodule Rpx.CLI do
            rpx -- simple and powerfull string replacer
 
       SYNOPSIS
-           rpx <string-to-be-replaced> <replacement> [-pxa]
+           rpx <string-to-be-replaced> <replacement> [base-path] [-xar]
 
       DESCRIPTION
 
@@ -23,7 +27,6 @@ defmodule Rpx.CLI do
 
            The following options are available:
 
-           --path | -p      The base path rpx will start analyzing recursively (default `.`).
            --ext | -x       The file extentions (comma separated) allowed to be analyzed (default see `~/.rpx.iex`).
            --all | -a       Replaces all found occurences without asking.
            --regex | -r     Treats the <string-to-be-replaced> as a regex instead of a simple text.
@@ -34,14 +37,12 @@ defmodule Rpx.CLI do
   defp parse_args(args) do
     switches = [
       ext: :string,
-      path: :string,
       all: :boolean,
       regex: :boolean
     ]
 
     aliases = [
       x: :ext,
-      p: :path,
       a: :all,
       r: :regex
     ]

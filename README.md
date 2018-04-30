@@ -13,24 +13,23 @@ Just download the binary in `bin/rpx` and add it to the path
 
 Type `rpx` to see instructions.
 
-```
+```shell
 NAME
-      rpx -- simple and powerfull string replacer
+     rpx -- simple and powerfull string replacer
 
 SYNOPSIS
-      rpx <string-to-be-replaced> <replacement> [-pxa]
+     rpx <string-to-be-replaced> <replacement> [base-path] [-xar]
 
 DESCRIPTION
 
-      Rpx scans all allowed files recursively and shows all occurences of <string-to-be-replaced> in each file, then it
-      asks for confirmation before replace all occurrences by <replacement>.
+     Rpx scans all allowed files recursively and shows all occurences of <string-to-be-replaced> in each file, then it
+     asks for confirmation before replace all occurrences by <replacement>.
 
-      The following options are available:
+     The following options are available:
 
-      --path | -p      The base path rpx will start analyzing recursively (default `.`)
-      --ext | -x       The file extentions (comma separated) allowed to be analyzed (default see `~/.rpx.iex`)
-      --all | -a       Replaces all found occurences without asking.
-
+     --ext | -x       The file extentions (comma separated) allowed to be analyzed (default see `~/.rpx.iex`).
+     --all | -a       Replaces all found occurences without asking.
+     --regex | -r     Treats the <string-to-be-replaced> as a regex instead of a simple text.
 ```
 
 ### Creating a bin

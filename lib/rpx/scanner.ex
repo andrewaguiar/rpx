@@ -23,8 +23,12 @@ defmodule Rpx.Scanner do
     matched_lines
       |> Enum.each(fn {id, file, line, index} ->
         around_text = highlight(format_line(line, term), term)
-        IO.puts("#{Colors.yellow(id)} :: #{Colors.green(file)}:#{Colors.blue(index)} -> #{around_text}")
+        IO.puts("#{Colors.yellow(id)} :: #{Colors.green(format_file(file))}:#{Colors.blue(index)} -> #{around_text}")
       end)
+  end
+
+  defp format_file(file) do
+    Path.split(file) |> Enum.join("/")
   end
 
   defp highlight(line, term) do

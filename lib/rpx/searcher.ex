@@ -1,7 +1,5 @@
 defmodule Rpx.Searcher do
-  def find(args_config, global_config) do
-    base_path = args_config[:path] || "."
-
+  def find(base_path, args_config, global_config) do
     deep_find_files(base_path, args_config, global_config) |> List.flatten
   end
 
