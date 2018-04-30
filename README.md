@@ -3,6 +3,8 @@
 Rpx is a tool to provide simple and extensible string replacement to projects, it is
 a `sed` less powerfull but simpler and already adapted to several project archtypes.
 
+![Example](readme-bg.png)
+
 ## Installation
 
 Just download the binary in `bin/rpx` and add it to the path
