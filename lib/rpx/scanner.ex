@@ -1,5 +1,6 @@
 defmodule Rpx.Scanner do
   alias Rpx.Colors
+  alias Rpx.Term
 
   def generate(files, term) do
     files
@@ -8,7 +9,7 @@ defmodule Rpx.Scanner do
           |> File.read!
           |> String.split("\n")
           |> Enum.with_index(1)
-          |> Enum.filter(fn {line, _index} -> line =~ term end)
+          |> Enum.filter(fn {line, _index} -> Term.match?(term,  line) end)
           |> Enum.map(fn {line, index} -> {file, line, index} end)
       end)
       |> List.flatten
@@ -27,12 +28,12 @@ defmodule Rpx.Scanner do
   end
 
   defp highlight(line, term) do
-    String.replace(line, term, Colors.red(term))
+    Term.highlight(term, line)
   end
 
   defp format_line(line, term) do
     if String.length(line) > 77 do
-      {index, matched_size} = :binary.match(line, term)
+      {index, matched_size} = Term.match(term, line)
 
       starting = if index - 30 >= 0, do: (index - 30), else: 0
       ending = index + matched_size + 29

@@ -7,7 +7,9 @@ defmodule Rpx do
   alias Rpx.Summarizer
   alias Rpx.Searcher
 
-  def run(args_config, term, replacement) do
+  def run(args_config, term_string, replacement) do
+    term = %Rpx.Term{value: term_string, regex: args_config[:regex] != nil}
+
     global_config = GlobalConfig.read(:default)
 
     all_files = Searcher.find(args_config, global_config)

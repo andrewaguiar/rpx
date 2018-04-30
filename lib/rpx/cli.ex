@@ -23,16 +23,28 @@ defmodule Rpx.CLI do
 
            The following options are available:
 
-           --path | -p      The base path rpx will start analyzing recursively (default `.`)
-           --ext | -x       The file extentions (comma separated) allowed to be analyzed (default see `~/.rpx.iex`)
+           --path | -p      The base path rpx will start analyzing recursively (default `.`).
+           --ext | -x       The file extentions (comma separated) allowed to be analyzed (default see `~/.rpx.iex`).
            --all | -a       Replaces all found occurences without asking.
+           --regex | -r     Treats the <string-to-be-replaced> as a regex instead of a simple text.
       """
     )
   end
 
   defp parse_args(args) do
-    switches = [ext: :string, path: :string, exec: :string, all: :boolean]
-    aliases = [x: :ext, p: :path, e: :exec, a: :all]
+    switches = [
+      ext: :string,
+      path: :string,
+      all: :boolean,
+      regex: :boolean
+    ]
+
+    aliases = [
+      x: :ext,
+      p: :path,
+      a: :all,
+      r: :regex
+    ]
 
     OptionParser.parse(args, switches: switches, aliases: aliases)
   end

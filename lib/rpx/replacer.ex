@@ -1,4 +1,6 @@
 defmodule Rpx.Replacer do
+  alias Rpx.Term
+
   def run(matched_lines, term, replacement, conditions) do
     matched_lines
       |> Enum.filter(fn {id, _, _, _} -> apply_replacement?(id, conditions) end)
@@ -13,7 +15,7 @@ defmodule Rpx.Replacer do
           |> Enum.with_index(1)
           |> Enum.map(fn {line, index} ->
             if Enum.member?(lines_to_be_replaced, index) do
-              String.replace(line, term, replacement, global: true)
+              Term.replace(term, line, replacement)
             else
               line
             end
