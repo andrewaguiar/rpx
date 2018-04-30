@@ -1,7 +1,28 @@
 defmodule Rpx.CLI do
+  alias Rpx.Colors
+
   def main(args) do
-    args |> parse_args |> run
+    args |> parse_args |> validate_args |> run
   end
+
+  defp validate_args(args = {_, [_, _], _}), do: args
+
+  defp validate_args(args = {_, [_, _, base_path], _}) do
+    if File.dir?(base_path) do
+      args
+    else
+      IO.puts(
+        """
+        ERROR
+            Invalid base_path #{Colors.red(base_path)}, should point to a valid directory
+        """
+      )
+
+      :error
+    end
+  end
+
+  defp validate_args(args), do: args
 
   defp run({args_config, [term, replacement], _}) do
     Rpx.run(args_config, term, replacement, ".")
