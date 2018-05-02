@@ -10,7 +10,7 @@ defmodule Rpx do
   def run(args_config, term_string, replacement, base_path) do
     term = %Rpx.Term{value: term_string, regex: args_config[:regex] != nil}
 
-    global_config = GlobalConfig.read(:default)
+    global_config = GlobalConfig.read(args_config[:profile] || "default")
 
     all_files = Searcher.find(base_path, args_config, global_config)
 

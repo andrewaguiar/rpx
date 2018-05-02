@@ -6,7 +6,7 @@ defmodule Rpx.GlobalConfig do
       |> File.read!
       |> Code.eval_string
 
-    Map.get(configs, profile)
+    Map.get(configs, String.to_atom(profile))
   end
 
   defp initialize do
@@ -16,11 +16,12 @@ defmodule Rpx.GlobalConfig do
   end
 
   defp basic_template do
+    # default global config is adapted to rails and elixir mix projects
     """
     %{
       default: %{
-        allowed_extentions: ["rb", "ex", "iex", "html", "erb", "html", "js", "css", "txt"],
-        ignored_folders: ["tmp", "log", ".git", "vendor", "public"]
+        allowed_extentions: ["rb", "ex", "iex", "html", "erb", "yaml", "js", "css", "txt"],
+        ignored_folders: ["tmp", "log", ".git", "vendor", "public", "_build", "cover", "docs", "deps"]
       }
     }
     """
