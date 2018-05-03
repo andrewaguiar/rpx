@@ -41,8 +41,8 @@ SYNOPSIS
 
 DESCRIPTION
 
-     Rpx scans all allowed files recursively and shows all occurences of <string-to-be-replaced> in each file, then it
-     asks for confirmation before replace all occurrences by <replacement>.
+     Rpx scans all allowed files recursively and shows all occurences of <string-to-be-replaced> in each file,
+     then it asks for confirmation before replace all occurrences by <replacement>.
 
      The following options are available:
 
@@ -59,8 +59,8 @@ PROFILES
        2. Ignored folders during the scan.
 
      When you don't pass --profile|-p argument it with use the :default profile defined in ~/.rpx.exs,
-     You can as many different profiles you want in the ~/.rpx.exs file as a ordinary elixir code (a Map structure)
-     following the template:
+     You can as many different profiles you want in the ~/.rpx.exs file as a ordinary elixir code
+     (a Map structure) following the template:
 
        profile_name: %{
          allowed_extentions: List,
