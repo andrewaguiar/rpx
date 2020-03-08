@@ -20,8 +20,31 @@ defmodule Rpx.GlobalConfig do
     """
     %{
       default: %{
-        allowed_extentions: ["rb", "ex", "iex", "html", "erb", "yaml", "js", "css", "txt"],
-        ignored_folders: ["tmp", "log", ".git", "vendor", "public", "_build", "cover", "docs", "deps"]
+        allowed_extentions: [
+          "rb",
+          "ex",
+          "iex",
+          "html",
+          "erb",
+          "yaml",
+          "js",
+          "jsx",
+          "ts",
+          "tsx",
+          "css",
+          "txt"
+        ],
+        ignored_folders: [
+          "tmp",
+          "log",
+          ".git",
+          "vendor",
+          "public",
+          "_build",
+          "cover",
+          "docs",
+          "deps"
+        ]
       }
     }
     """
