@@ -18,4 +18,8 @@ defmodule Rpx.Colors do
   def yellow(text) do
     "\e[1;33m#{text}\e[0m"
   end
+
+  def bold(text) do
+    "\e[1m#{text}\e[0m"
+  end
 end
