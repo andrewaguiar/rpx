@@ -1,37 +1,30 @@
 defmodule Rpx do
   alias Rpx.Colors
   alias Rpx.ConditionsParser
-  alias Rpx.GlobalConfig
   alias Rpx.Replacer
   alias Rpx.Scanner
   alias Rpx.Summarizer
   alias Rpx.Searcher
 
-  def run(args_config, term_string, replacement, base_path) do
+  def run(args_config, term_string, replacement) do
     term = %Rpx.Term{value: term_string, regex: args_config[:regex] != nil}
 
-    global_config = GlobalConfig.read(args_config[:profile] || "default")
-
-    all_files = Searcher.find(base_path, args_config, global_config)
+    all_files = Searcher.find()
 
     matched_lines = Scanner.generate(all_files, term)
 
     Scanner.print(matched_lines, term)
 
-    Summarizer.print(base_path, matched_lines, args_config, global_config)
+    Summarizer.print(matched_lines)
 
-    run_replacer(matched_lines, term, replacement, args_config[:all])
+    run_replacer(matched_lines, term, replacement)
   end
 
-  defp run_replacer([], _, _, _) do
+  defp run_replacer([], _, _) do
     IO.puts("No occurrences found")
   end
 
-  defp run_replacer(matched_lines, term, replacement, true) do
-    Replacer.run(matched_lines, term, replacement, ["a"])
-  end
-
-  defp run_replacer(matched_lines, term, replacement, _) do
+  defp run_replacer(matched_lines, term, replacement) do
     IO.puts("Instructions:")
     IO.puts("  Type an \"#{Colors.green("a")}\" to replace all.")
     IO.puts("  Type a single #{Colors.yellow("ID")} number to replace only that line. example #{Colors.yellow("1")}")

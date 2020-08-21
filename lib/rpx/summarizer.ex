@@ -1,7 +1,7 @@
 defmodule Rpx.Summarizer do
   alias Rpx.Colors
 
-  def print(base_path, matched_lines, args_config, global_config) do
+  def print(matched_lines) do
     total_lines = matched_lines
       |> length
 
@@ -10,11 +10,9 @@ defmodule Rpx.Summarizer do
       |> Enum.uniq
       |> length
 
-    ext = args_config[:ext] || (global_config.allowed_extentions |> Enum.join(", "))
-
     IO.puts(
       "\n#{Colors.green(total_files)} files and #{Colors.green(total_lines)} " <>
-      "lines found in #{Colors.green(base_path)} with the extentions #{Colors.green(ext)}\n"
+      "lines found\n"
     )
   end
 end
