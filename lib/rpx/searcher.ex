@@ -10,6 +10,12 @@ defmodule Rpx.Searcher do
     |> Enum.reject(fn s -> s == "" end)
   end
 
+  defp handle({"", 128}) do
+    IO.puts("PWD is not a git controlled folder")
+
+    System.halt(1)
+  end
+
   defp handle({_, 1}) do
     IO.puts("git ls-files command not found")
 
