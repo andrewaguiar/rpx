@@ -8,6 +8,7 @@ defmodule Rpx.Searcher do
     result
     |> String.split("\n")
     |> Enum.reject(fn s -> s == "" end)
+    |> Enum.filter(fn file -> valid_file?(file) end)
   end
 
   defp handle({"", 128}) do
@@ -20,5 +21,14 @@ defmodule Rpx.Searcher do
     IO.puts("git ls-files command not found")
 
     System.halt(1)
+  end
+
+  defp valid_file?(file) do
+    case File.read(file) do
+      {:error, :enoent} ->
+        false
+      {:ok, file_content} ->
+        String.valid?(file_content) && !String.contains?(file_content, <<0>>)
+    end
   end
 end
