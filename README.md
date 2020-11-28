@@ -1,7 +1,18 @@
 # Rpx (simple and extensible string replacer)
 
-Rpx is a tool to provide simple and extensible string replacement to projects, it is
-a `sed` less powerfull but simpler and already adapted to several project archtypes.
+Rpx is a tool to provide simple string replacement to GIT controled projects, it is
+a `sed` less powerfull but simpler.
+
+## Motivation
+
+Sometimes I wanted to perform some string replacement on several files, I used `sed` for this
+but even though it works perfectly I missed some features like:
+
+  - Filtering only git files `git ls-files`.
+  - Visual preview of changes.
+  - Be able to cherry pick which files / lines would be changed.
+
+So because this I decided to create my own tool for this.
 
 ![Example](example.png)
 
