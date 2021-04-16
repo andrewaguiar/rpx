@@ -8,17 +8,17 @@ defmodule Rpx.Searcher do
     result
     |> String.split("\n")
     |> Enum.reject(fn s -> s == "" end)
-    |> Enum.filter(fn s -> filename == nil || String.contains?(x, filename) end)
+    |> Enum.filter(fn s -> filename == nil || String.contains?(s, filename) end)
     |> Enum.filter(fn file -> valid_file?(file) end)
   end
 
-  defp handle({"", 128}) do
+  defp handle({"", 128}, _) do
     IO.puts("PWD is not a git controlled folder")
 
     System.halt(1)
   end
 
-  defp handle({_, 1}) do
+  defp handle({_, 1}, _) do
     IO.puts("git ls-files command not found")
 
     System.halt(1)
