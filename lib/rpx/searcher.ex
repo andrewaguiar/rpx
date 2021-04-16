@@ -1,13 +1,14 @@
 defmodule Rpx.Searcher do
-  def find() do
+  def find(filename) do
     System.cmd("git", ["ls-files"])
-    |> handle
+    |> handle(filename)
   end
 
-  defp handle({result, 0}) do
+  defp handle({result, 0}, filename) do
     result
     |> String.split("\n")
     |> Enum.reject(fn s -> s == "" end)
+    |> Enum.filter(fn s -> filename == nil || String.contains?(x, filename) end)
     |> Enum.filter(fn file -> valid_file?(file) end)
   end
 

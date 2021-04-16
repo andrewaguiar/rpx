@@ -9,6 +9,10 @@ defmodule Rpx.CLI do
     Rpx.run(args_config, term, replacement)
   end
 
+  defp run({args_config, [term], []}) do
+    Rpx.run(args_config, term, nil)
+  end
+
   defp run(_) do
     IO.puts(
       """
@@ -16,7 +20,7 @@ defmodule Rpx.CLI do
              rpx -- simple and powerfull string replacer based on non gitignore files
 
       #{Colors.bold("SYNOPSIS")}
-             rpx <string-to-be-replaced> <replacement> [base-path] [-r]
+             rpx <string-to-be-replaced> [replacement] [-r]
 
       #{Colors.bold("DESCRIPTION")}
 
@@ -24,6 +28,12 @@ defmodule Rpx.CLI do
              asks for confirmation before replace all occurrences by <replacement>.
 
              The following options are available:
+
+             #{Colors.bold("--filename | -f")}
+                    Filters by absolute path name in any part (defaults '').
+
+                    Example: "rpx AppController ApplicationController -f controllers" will consider only files with controllers
+                             in absolute path like ("app/controllers/app_controllers.rb", "config/controllers.rb").
 
              #{Colors.bold("--regex | -r")}
                     Treats the <string-to-be-replaced> as a regex instead of a simple text (default false).
@@ -33,7 +43,7 @@ defmodule Rpx.CLI do
 
   defp parse_args(args) do
     switches = [regex: :boolean]
-    aliases = [r: :regex]
+    aliases = [r: :regex, f: :filename]
 
     OptionParser.parse(args, switches: switches, aliases: aliases)
   end

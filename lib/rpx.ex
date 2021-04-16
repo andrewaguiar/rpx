@@ -9,7 +9,7 @@ defmodule Rpx do
   def run(args_config, term_string, replacement) do
     term = %Rpx.Term{value: term_string, regex: args_config[:regex] != nil}
 
-    all_files = Searcher.find()
+    all_files = Searcher.find(args_config[:filename])
 
     matched_lines = Scanner.generate(all_files, term)
 
@@ -17,7 +17,9 @@ defmodule Rpx do
 
     Summarizer.print(matched_lines)
 
-    run_replacer(matched_lines, term, replacement)
+    if replacement do
+      run_replacer(matched_lines, term, replacement)
+    end
   end
 
   defp run_replacer([], _, _) do
