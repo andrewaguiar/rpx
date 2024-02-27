@@ -21,7 +21,7 @@ So because this I decided to create my own tool for this.
 Just download the binary in `bin/rpx` and add it to the path
 
 ```shell
-wget https://raw.githubusercontent.com/andrewaguiar/rpx/master/bin/rpx
+wget https://raw.githubusercontent.com/andrewaguiar/rpx/master/dist/rpx
 chmod +x rpx
 ```
 
@@ -30,13 +30,13 @@ Or clone the project and make the binary
 ```shell
 git clone git@github.com:andrewaguiar/rpx.git
 cd rpx
-mix escript.build
+./make_dist
 ```
 
 Then add it to PATH
 
 ```shell
-export PATH="$PATH:rpx_location"
+export PATH="$PATH:rpx_location/dist"
 ```
 
 ## Usage
@@ -69,4 +69,4 @@ DESCRIPTION
 
 ### Creating a bin
 
-run `./make_dist` and the binary will be generated in `./bin`.
+run `./make_dist` and the binary will be generated in `./dist`.
