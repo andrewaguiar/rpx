@@ -48,7 +48,7 @@ NAME
        rpx -- simple and powerfull string replacer based on non gitignore files
 
 SYNOPSIS
-       rpx <string-to-be-replaced> [replacement] [-r]
+       rpx <string-to-be-replaced> [replacement] [-f]
 
 DESCRIPTION
 
@@ -62,9 +62,6 @@ DESCRIPTION
 
               Example: "rpx AppController ApplicationController -f controllers" will consider only files with controllers
                        in absolute path like ("app/controllers/app_controllers.rb", "config/controllers.rb").
-
-       --regex | -r
-              Treats the <string-to-be-replaced> as a regex instead of a simple text (default false).
 ```
 
 ### Creating a bin
