@@ -3,6 +3,11 @@ name = "rpx"
 version = "1.0.0"
 edition = "2021"
 authors = ["Andrew S Aguiar <andrewaguiar6@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/andrewaguiar/rpx"
+license = "MIT"
+keywords = ["cli", "sed", "tools"]
+description = "Rpx is a tool to provide simple string replacement to GIT controled projects, it is a `sed` less powerfull but simpler."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
