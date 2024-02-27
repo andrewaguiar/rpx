@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir ./dist
+mkdir -p ./dist
 
 cargo build --release
 
-cp target/release/rpx ./dist/
+cp target/release/cli-rpx ./dist/rpx

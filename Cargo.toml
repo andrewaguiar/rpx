@@ -1,5 +1,5 @@
 [package]
-name = "rpx"
+name = "cli-rpx"
 version = "1.0.0"
 edition = "2021"
 authors = ["Andrew S Aguiar <andrewaguiar6@gmail.com>"]
