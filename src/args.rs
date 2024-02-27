@@ -9,9 +9,6 @@ pub struct Args {
 
     #[arg(short, long)]
     pub filename: Option<String>,
-
-    #[arg(short, long)]
-    pub regex: bool,
 }
 
 pub fn get() -> Args {
