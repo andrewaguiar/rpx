@@ -9,6 +9,10 @@ license = "MIT"
 keywords = ["cli", "sed", "tools"]
 description = "Rpx is a tool to provide simple string replacement to GIT controled projects, it is a `sed` less powerfull but simpler."
 
+[[bin]]
+name = "rpx"
+path = "src/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]

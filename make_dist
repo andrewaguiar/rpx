@@ -4,4 +4,4 @@ mkdir -p ./dist
 
 cargo build --release
 
-cp target/release/cli-rpx ./dist/rpx
+cp target/release/rpx ./dist/rpx
