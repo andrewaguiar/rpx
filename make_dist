@@ -1,1 +1,0 @@
-mix escript.build && mkdir -p ./bin && mv rpx ./bin
