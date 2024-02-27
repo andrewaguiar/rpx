@@ -2,7 +2,7 @@ use crate::args::Args;
 use std::collections::HashSet;
 use std::fs;
 
-// Test scanner
+// Tost scanner
 
 #[derive(Clone, Debug)]
 pub struct Entry {
@@ -29,33 +29,37 @@ pub fn scan(files: Vec<String>, args: &Args) -> SearchResult {
 
     let mut number_of_files = HashSet::new();
 
-    for file in files {
+    files.iter().filter(|file| file.len() > 0).for_each(|file| {
         let mut line_index = 1;
 
-        if file != "" {
-            let contents =
-                fs::read_to_string(file.clone()).expect("Should have been able to read the file");
+        match fs::read_to_string(file.clone()) {
+            Ok(contents) => {
+                contents
+                    .lines()
+                    .collect::<Vec<&str>>()
+                    .iter()
+                    .for_each(|line| {
+                        if line.contains(searched_term) {
+                            id = id + 1;
 
-            for line in contents.split("\n") {
-                if line.contains(searched_term) {
-                    id = id + 1;
+                            let entry = Entry {
+                                id: id,
+                                file: file.clone(),
+                                line_index: line_index,
+                                line: line.to_string(),
+                            };
 
-                    let entry = Entry {
-                        id: id,
-                        file: file.clone(),
-                        line_index: line_index,
-                        line: line.to_string(),
-                    };
+                            entries.push(entry);
 
-                    entries.push(entry);
+                            number_of_files.insert(file.clone());
+                        }
 
-                    number_of_files.insert(file.clone());
-                }
-
-                line_index = line_index + 1;
+                        line_index = line_index + 1;
+                    });
             }
+            Err(_err) => {}
         }
-    }
+    });
 
     return SearchResult {
         searched_term: searched_term.clone(),
