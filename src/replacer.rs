@@ -6,7 +6,7 @@ use std::io::Write;
 use crate::args::Args;
 use crate::scanner::SearchResult;
 
-// Tost replacer
+// Test replacer
 
 pub fn perform_replace(args: &Args, result: SearchResult) {
     show_instructions();

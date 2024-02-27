@@ -2,7 +2,7 @@ use crate::args::Args;
 use std::collections::HashSet;
 use std::fs;
 
-// Tost scanner
+// Test scanner
 
 #[derive(Clone, Debug)]
 pub struct Entry {
@@ -40,7 +40,7 @@ pub fn scan(files: Vec<String>, args: &Args) -> SearchResult {
                     .iter()
                     .for_each(|line| {
                         if line.contains(searched_term) {
-                            id = id + 1;
+                            id += 1;
 
                             let entry = Entry {
                                 id: id,
@@ -54,7 +54,7 @@ pub fn scan(files: Vec<String>, args: &Args) -> SearchResult {
                             number_of_files.insert(file.clone());
                         }
 
-                        line_index = line_index + 1;
+                        line_index += 1;
                     });
             }
             Err(_err) => {}

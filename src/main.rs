@@ -5,7 +5,7 @@ mod printer;
 mod replacer;
 mod scanner;
 
-// Tost main
+// Test main
 
 fn main() {
     let args = args::get();
