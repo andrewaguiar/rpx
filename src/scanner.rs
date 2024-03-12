@@ -20,6 +20,15 @@ pub struct SearchResult {
     pub entries: Vec<Entry>,
 }
 
+fn match_file(file: &str, filename: &Option<String>) -> bool {
+    match filename {
+        Some(f) => {
+            return file.contains(f);
+        }
+        None => return true,
+    }
+}
+
 pub fn scan(files: Vec<String>, args: &Args) -> SearchResult {
     let mut entries = Vec::new();
 
@@ -29,37 +38,42 @@ pub fn scan(files: Vec<String>, args: &Args) -> SearchResult {
 
     let mut number_of_files = HashSet::new();
 
-    files.iter().filter(|file| file.len() > 0).for_each(|file| {
-        let mut line_index = 1;
+    println!("{:?}", args);
 
-        match fs::read_to_string(file.clone()) {
-            Ok(contents) => {
-                contents
-                    .lines()
-                    .collect::<Vec<&str>>()
-                    .iter()
-                    .for_each(|line| {
-                        if line.contains(searched_term) {
-                            id += 1;
+    files
+        .iter()
+        .filter(|file| file.len() > 0 && match_file(file, &args.filename))
+        .for_each(|file| {
+            let mut line_index = 1;
 
-                            let entry = Entry {
-                                id: id,
-                                file: file.clone(),
-                                line_index: line_index,
-                                line: line.to_string(),
-                            };
+            match fs::read_to_string(file.clone()) {
+                Ok(contents) => {
+                    contents
+                        .lines()
+                        .collect::<Vec<&str>>()
+                        .iter()
+                        .for_each(|line| {
+                            if line.contains(searched_term) {
+                                id += 1;
 
-                            entries.push(entry);
+                                let entry = Entry {
+                                    id,
+                                    file: file.clone(),
+                                    line_index,
+                                    line: line.to_string(),
+                                };
 
-                            number_of_files.insert(file.clone());
-                        }
+                                entries.push(entry);
 
-                        line_index += 1;
-                    });
+                                number_of_files.insert(file.clone());
+                            }
+
+                            line_index += 1;
+                        });
+                }
+                Err(_err) => {}
             }
-            Err(_err) => {}
-        }
-    });
+        });
 
     return SearchResult {
         searched_term: searched_term.clone(),
