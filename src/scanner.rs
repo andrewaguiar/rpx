@@ -38,8 +38,6 @@ pub fn scan(files: Vec<String>, args: &Args) -> SearchResult {
 
     let mut number_of_files = HashSet::new();
 
-    println!("{:?}", args);
-
     files
         .iter()
         .filter(|file| file.len() > 0 && match_file(file, &args.filename))
